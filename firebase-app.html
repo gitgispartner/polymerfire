@@ -14,11 +14,9 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
 <link rel="import" href="firebase-auth-script.html">
 <link rel="import" href="firebase-storage-script.html">
 <link rel="import" href="firebase-messaging-script.html">
-<link rel="import" href="firebase-firestore-script.html">
-<link rel="import" href="firebase-functions-script.html">
 <dom-module id="firebase-app">
   <script>
-    (function() {
+    (function () {
       'use strict';
 
       /**
@@ -98,12 +96,17 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
           },
 
           /**
-           * The Google Cloud Project ID for your project. You can find this
-           * in the Firebase Console under "Web Setup".
-           *
-           * For example: `polymerfire-test`
-           */
+          * fireabase config projectId
+          */
           projectId: {
+            type: String,
+            value: null
+          },
+
+          /**
+          * fireabase config appId
+          */
+          appId: {
             type: String,
             value: null
           },
@@ -116,19 +119,20 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
           app: {
             type: Object,
             notify: true,
-            computed: '__computeApp(name, apiKey, authDomain, databaseUrl, storageBucket, messagingSenderId, projectId)'
+            computed: '__computeApp(name, apiKey, authDomain, databaseUrl, storageBucket, messagingSenderId,projectId,appId)'
           }
         },
 
-        __computeApp: function(name, apiKey, authDomain, databaseUrl, storageBucket, messagingSenderId, projectId) {
+        __computeApp: function (name, apiKey, authDomain, databaseUrl, storageBucket, messagingSenderId, projectId, appId) {
           if (apiKey && authDomain && databaseUrl) {
             var init = [{
               apiKey: apiKey,
               authDomain: authDomain,
               databaseURL: databaseUrl,
-              projectId: projectId,
               storageBucket: storageBucket,
-              messagingSenderId: messagingSenderId
+              messagingSenderId: messagingSenderId,
+              projectId: projectId,
+              appId: appId
             }];
 
             if (name) {
